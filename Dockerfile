@@ -7,9 +7,6 @@ WORKDIR /root
 RUN chmod +x /app/cmd/* /app/config/* /app/init.sh && \ 
     if [ -f /app/config/sources.list ]; then mv /app/config/sources.list /etc/apt/sources.list; fi && \
     /app/config/export.sh && \
-    apt update && apt install -y procps cron && \
+    apt update && apt install -y procps cron
     
-
-
-
 CMD ["/bin/bash","-c",". /app/init.sh"]
