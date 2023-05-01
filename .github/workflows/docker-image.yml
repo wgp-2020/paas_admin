@@ -1,0 +1,34 @@
+name: 构建镜像并推送
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PORT: ${{ secrets.PORT || '80' }}
+      USERNAME: ${{ secrets.USERNAME || 'admin' }}
+      PASSWORD: ${{ secrets.PASSWORD || 'admin' }}
+      UUID: ${{ secrets.UUID || '1eb6e917-774b-4a84-aff6-b058577c60a5' }}
+      PATH_VLESS: ${{ secrets.PATH_VLESS || "/${{ UUID }}/vless" }}
+      PATH_VMESS: ${{ secrets.PATH_VMESS || "/${{ UUID }}/vmess" }}
+      WARP_SERVER: ${{ secrets.WARP_SERVER || 'engage.cloudflareclient.com' }}
+      WARP_KEY: ${{ secrets.WARP_KEY }}
+      TUNNEL: ${{ secrets.TUNNEL || 0 }}
+    steps:
+    - name: 签出仓库
+      uses: actions/checkout@v3
+         
+    - name: 登录DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        
+    - name: 制作镜像并上传
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.IMAGE }}
