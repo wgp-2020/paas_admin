@@ -7,20 +7,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PORT: ${{ secrets.PORT || '80' }}
-      USERNAME: ${{ secrets.USERNAME || 'admin' }}
-      PASSWORD: ${{ secrets.PASSWORD || 'admin' }}
-      UUID: ${{ secrets.UUID || '1eb6e917-774b-4a84-aff6-b058577c60a5' }}
+      PORT: ${{ secrets.PORT }}
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      UUID: ${{ secrets.UUID }}
       PATH_VLESS: ${{ secrets.PATH_VLESS }}
       PATH_VMESS: ${{ secrets.PATH_VMESS }}
-      WARP_SERVER: ${{ secrets.WARP_SERVER || 'engage.cloudflareclient.com' }}
+      WARP_SERVER: ${{ secrets.WARP_SERVER }}
       WARP_KEY: ${{ secrets.WARP_KEY }}
-      TUNNEL: ${{ secrets.TUNNEL || 0 }}
+      TUNNEL: ${{ secrets.TUNNEL }}
     steps:
     - name: 设置变量
       run: |
-        export PATH_VLESS=${PATH_VLESS-/$UUID/vless}
-        export PATH_VMESS=${PATH_VMESS-/$UUID/vmess}
+        export PORT=${PORT:-80}
+        export USERNAME=${USERNAME:-admin}
+        export PASSWORD=${PASSWORD:-admin}
+        export UUID=${UUID:-1eb6e917-774b-4a84-aff6-b058577c60a5}
+        export PATH_VLESS=${PATH_VLESS:-/$UUID/vless}
+        export PATH_VMESS=${PATH_VMESS:-/$UUID/vmess}
+        export WARP_SERVER=${WARP_SERVER:-engage.cloudflareclient.com}
+        export WARP_KEY=${WARP_KEY}
+        export TUNNEL=${TUNNEL:-0}
       
     - name: 签出仓库
       uses: actions/checkout@v3
