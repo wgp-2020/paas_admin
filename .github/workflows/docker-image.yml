@@ -23,7 +23,7 @@ jobs:
         push: true
         tags: ${{ secrets.IMAGE }}
         build-args: |
-          PORT: ${{ vars.PORT }}
+          PORT=${{ vars.PORT }}
           USERNAME=${{ vars.USERNAME }}
           PASSWORD=${{ vars.PASSWORD }}
           UUID=${{ vars.UUID }}
