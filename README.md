@@ -36,7 +36,7 @@
 
       ![image](https://user-images.githubusercontent.com/70625361/235481505-0eff5199-48f3-4e08-91ae-224e379d4f1a.png)
      </details>
-5. 删除工作流记录：防止配置信息暴露
+5. 运行完毕后：删除工作流记录，防止配置信息暴露
 
 ****
 
