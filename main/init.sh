@@ -3,8 +3,8 @@
 # 环境变量
 export APP_DIR=$(dirname ${BASH_SOURCE[0]})
 export PATH=$PATH:$APP_DIR/cmd
-export USERNAME=${USERNAME-admin}     
-export PASSWORD=${PASSWORD-admin}
+# export USERNAME=${USERNAME-admin}     
+# export PASSWORD=${PASSWORD-admin}
 export SB_LOG="$APP_DIR/logs/sb.log"
 export CF_LOG="$APP_DIR/logs/cf.log"
 
