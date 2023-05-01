@@ -26,7 +26,7 @@ jobs:
           PORT: ${{ secrets.PORT || 80 }}
           USERNAME=${{ secrets.USERNAME }}
           PASSWORD=${{ secrets.PASSWORD }}
-          UUID=${{ env.UUID }}
+          UUID=${{ UUID }}
           PATH_VLESS=${{ secrets.PATH_VLESS }}
           PATH_VMESS=${{ secrets.PATH_VMESS }}
           WARP_SERVER=${{ secrets.WARP_SERVER }}
