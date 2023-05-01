@@ -6,16 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PORT: ${{ secrets.PORT }}
-      USERNAME: ${{ secrets.USERNAME }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-      UUID: ${{ secrets.UUID }}
-      PATH_VLESS: ${{ secrets.PATH_VLESS }}
-      PATH_VMESS: ${{ secrets.PATH_VMESS }}
-      WARP_SERVER: ${{ secrets.WARP_SERVER }}
-      WARP_KEY: ${{ secrets.WARP_KEY }}
-      TUNNEL: ${{ secrets.TUNNEL }}
     steps:      
     - name: 签出仓库
       uses: actions/checkout@v3
@@ -32,3 +22,13 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.IMAGE }}
+        build-args: |
+          PORT: ${{ secrets.PORT }}
+          USERNAME=${{ secrets.USERNAME }}
+          PASSWORD=${{ secrets.PASSWORD }}
+          UUID=${{ secrets.UUID }}
+          PATH_VLESS=${{ secrets.PATH_VLESS }}
+          PATH_VMESS=${{ secrets.PATH_VMESS }}
+          WARP_SERVER=${{ secrets.WARP_SERVER }}
+          WARP_KEY=${{ secrets.WARP_KEY }}
+          TUNNEL=${{ secrets.TUNNEL }}
