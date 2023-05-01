@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# 隧道连接本地80端口
+cmd="cloudflared tunnel --url http://127.0.0.1:${PORT}"
+
+if [ -z "$1" ]; then
+  # 重启隧道
+  pkill -f "$cmd"
+  cat /dev/null > ${CF_LOG}
+  nohup $cmd &>> ${CF_LOG} & disown
+elif [ "$1" = "-t" ]; then
+  # 输出日志
+  tail -fn 100 ${CF_LOG}
+elif [ "$1" = "-h" ]; then
+  # 查看链接
+  head -n 30 ${CF_LOG}
+fi

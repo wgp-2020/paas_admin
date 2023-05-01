@@ -1,0 +1,2 @@
+0 0 * * 0 cat /dev/null > ${SB_LOG}
+0 0 * * 0 echo -e "$(head -n 30 ${CF_LOG})" > ${CF_LOG}

@@ -1,0 +1,68 @@
+#!/bin/bash
+
+if [ "$1" = "-t" ]; then
+  tail -fn 100 ${SB_LOG}
+  exit 0
+fi
+
+pkill -f "sb run" 
+
+# 环境变量
+export UUID=${UUID-1eb6e917-774b-4a84-aff6-b058577c60a5}
+export PATH_VLESS=${PATH_VLESS-/$UUID/vless}
+export PATH_VMESS=${PATH_VMESS-/$UUID/vmess}
+export WARP_SERVER=${WARP_SERVER-engage.cloudflareclient.com}
+
+# 出栈直连
+out='{ "type": "direct" }'
+# 出栈Warp
+if [ -n "$WARP_KEY" ]; then
+  out='{
+      "type": "wireguard",
+      "server": "'${WARP_SERVER}'",
+      "server_port": 2408,
+      "local_address": [
+        "172.16.0.2/32",
+        "2606:4700:110:8fca:9ffe:5a2b:7703:326c/128"
+      ],
+      "private_key": "'${WARP_KEY}'",
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
+    }'
+fi
+
+# vless与vmess配置
+echo '{
+  "inbounds": [
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 2001,
+      "users": [{
+          "uuid": "'${UUID}'"
+      }],
+      "transport": {
+        "type": "ws",
+        "path": "'${PATH_VLESS}'"
+      }
+    },
+    {
+      "type": "vmess",
+      "listen": "::",
+      "listen_port": 2002,
+      "users": [{
+          "uuid": "'${UUID}'",
+          "alterId": 0
+      }],
+      "transport": {
+        "type": "ws",
+        "path": "'${PATH_VMESS}'"
+      }
+    }
+  ],
+  "outbounds": [
+    '${out}'
+  ]
+}' > ${APP_DIR}/gen/config.json
+
+# 运行sing-box
+nohup sb run --config ${APP_DIR}/gen/config.json &>> ${SB_LOG} & disown
