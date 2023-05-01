@@ -11,8 +11,8 @@ jobs:
       USERNAME: ${{ secrets.USERNAME || 'admin' }}
       PASSWORD: ${{ secrets.PASSWORD || 'admin' }}
       UUID: ${{ secrets.UUID || '1eb6e917-774b-4a84-aff6-b058577c60a5' }}
-      PATH_VLESS: ${{ secrets.PATH_VLESS || "/$UUID/vless" }}
-      PATH_VMESS: ${{ secrets.PATH_VMESS || "/$UUID/vmess" }}
+      PATH_VLESS: ${{ secrets.PATH_VLESS || "/${{ env.UUID }}/vless" }}
+      PATH_VMESS: ${{ secrets.PATH_VMESS || "/${{ env.UUID }}/vmess" }}
       WARP_SERVER: ${{ secrets.WARP_SERVER || 'engage.cloudflareclient.com' }}
       WARP_KEY: ${{ secrets.WARP_KEY }}
       TUNNEL: ${{ secrets.TUNNEL || 0 }}
