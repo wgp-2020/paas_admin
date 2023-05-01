@@ -23,12 +23,12 @@ jobs:
         push: true
         tags: ${{ secrets.IMAGE }}
         build-args: |
-          PORT: ${{ secrets.PORT || 80 }}
-          USERNAME=${{ secrets.USERNAME }}
-          PASSWORD=${{ secrets.PASSWORD }}
+          PORT: ${{ vars.PORT }}
+          USERNAME=${{ vars.USERNAME }}
+          PASSWORD=${{ vars.PASSWORD }}
           UUID=${{ vars.UUID }}
-          PATH_VLESS=${{ secrets.PATH_VLESS }}
-          PATH_VMESS=${{ secrets.PATH_VMESS }}
-          WARP_SERVER=${{ secrets.WARP_SERVER }}
-          WARP_KEY=${{ secrets.WARP_KEY }}
-          TUNNEL=${{ secrets.TUNNEL }}
+          PATH_VLESS=${{ vars.PATH_VLESS }}
+          PATH_VMESS=${{ vars.PATH_VMESS }}
+          WARP_SERVER=${{ vars.WARP_SERVER }}
+          WARP_KEY=${{ vars.WARP_KEY }}
+          TUNNEL=${{ vars.TUNNEL }}
