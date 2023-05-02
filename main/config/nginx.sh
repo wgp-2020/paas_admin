@@ -5,6 +5,8 @@ echo 'server {
     listen  [::]:'${PORT}' default_server;
     server_name  _;
 
+    client_max_body_size 9999g;
+
     proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
