@@ -8,6 +8,9 @@ export PATH=$PATH:$APP_DIR/cmd
 export SB_LOG="$APP_DIR/logs/sb.log"
 export CF_LOG="$APP_DIR/logs/cf.log"
 
+# 更新
+cloudflared update
+
 # shell终端
 pkill -f "ttyd"
 nohup ttyd -c ${USERNAME}:${PASSWORD} bash &>/dev/null & disown
