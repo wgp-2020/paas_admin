@@ -2,7 +2,6 @@
 
 echo 'server {
     listen       '${PORT}' default_server;
-    listen  [::]:'${PORT}' default_server;
     server_name  _;
 
     client_max_body_size 9999g;
