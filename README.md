@@ -15,7 +15,7 @@
 1. Fork当前仓库
 2. 设置DockerHub账号 (必填)：Settings > Secrets and variables > Actions > 添加Secrets变量
    - DOCKERHUB_USERNAME：用户名
-   - DOCKERHUB_PASSWROD：密码
+   - DOCKERHUB_PASSWORD：密码
    - IMAGE：镜像名称
      - 格式：`用户名/任意名称:任意标签`
      - 例如：zhangsan/demo:latest
